@@ -4,8 +4,10 @@
 -->
 <template>
   <div class="sla-search-input">
-    <span class="sla-search-input__icon">🔍</span>
+    <span class="sla-search-input__icon" aria-hidden="true">🔍</span>
+    <label for="sla-search-input" class="sla-search-input__sr-only">Buscar por rol, estado o SLA</label>
     <input
+      id="sla-search-input"
       type="text"
       class="sla-search-input__field"
       :value="modelValue"
@@ -31,6 +33,16 @@ const handleInput = (event) => {
 </script>
 
 <style scoped>
+/* Texto solo para lectores de pantalla */
+.sla-search-input__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 .sla-search-input {
   position: relative;
   display: flex;

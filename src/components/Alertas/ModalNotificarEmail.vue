@@ -26,11 +26,12 @@
         <q-form @submit="enviarNotificacion" class="q-gutter-md">
           <!-- Campo Remitente (Usuario Logueado) - Solo lectura -->
           <div>
-            <label class="text-weight-bold text-body2 q-mb-xs block">
+            <label for="modal-notificar-email-remitente-tu" class="text-weight-bold text-body2 q-mb-xs block">
               <q-icon name="send" class="q-mr-xs" />
               Remitente (Tú)
             </label>
             <q-input
+              for="modal-notificar-email-remitente-tu"
               outlined
               :model-value="`${formulario.remitenteNombre} <${formulario.remitenteEmail}>`"
               readonly
@@ -49,8 +50,9 @@
 
           <!-- Campo Destinatarios -->
           <div>
-            <label class="text-weight-bold text-body2 q-mb-xs block"> Destinatario </label>
+            <label for="modal-notificar-email-destinatario" class="text-weight-bold text-body2 q-mb-xs block"> Destinatario </label>
             <q-input
+              for="modal-notificar-email-destinatario"
               outlined
               v-model="formulario.destinatarios"
               readonly
@@ -65,8 +67,8 @@
 
           <!-- Campo Asunto -->
           <div>
-            <label class="text-weight-bold text-body2 q-mb-xs block"> Asunto </label>
-            <q-input outlined v-model="formulario.asunto" dense>
+            <label for="modal-notificar-email-asunto" class="text-weight-bold text-body2 q-mb-xs block"> Asunto </label>
+            <q-input for="modal-notificar-email-asunto" outlined v-model="formulario.asunto" dense>
               <template v-slot:prepend>
                 <q-icon name="subject" />
               </template>
@@ -75,8 +77,8 @@
 
           <!-- Campo Mensaje -->
           <div>
-            <label class="text-weight-bold text-body2 q-mb-xs block"> Mensaje </label>
-            <q-input outlined v-model="formulario.mensaje" type="textarea" rows="6" dense>
+            <label for="modal-notificar-email-mensaje" class="text-weight-bold text-body2 q-mb-xs block"> Mensaje </label>
+            <q-input for="modal-notificar-email-mensaje" outlined v-model="formulario.mensaje" type="textarea" rows="6" dense>
               <template v-slot:prepend>
                 <q-icon name="message" />
               </template>

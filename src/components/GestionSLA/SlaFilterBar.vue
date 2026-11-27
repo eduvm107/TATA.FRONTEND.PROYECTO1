@@ -72,12 +72,13 @@
           <div class="filtros-grid">
             <!-- Fecha Solicitud -->
             <div class="filtros-group">
-              <label class="filtros-label">
+              <label for="sla-filter-bar-fecha-solicitud" class="filtros-label">
                 <q-icon name="calendar_today" size="18px" class="q-mr-xs" />
                 Fecha Solicitud
               </label>
               <div class="filtros-date-range">
                 <q-input
+                  for="sla-filter-bar-fecha-solicitud"
                   outlined
                   dense
                   v-model="fechaSolicitudDesde"
@@ -98,12 +99,13 @@
 
             <!-- Fecha Ingreso -->
             <div class="filtros-group">
-              <label class="filtros-label">
+              <label for="sla-filter-bar-fecha-ingreso" class="filtros-label">
                 <q-icon name="login" size="18px" class="q-mr-xs" />
                 Fecha Ingreso
               </label>
               <div class="filtros-date-range">
                 <q-input
+                  for="sla-filter-bar-fecha-ingreso"
                   outlined
                   dense
                   v-model="fechaIngresoDesde"
@@ -129,11 +131,12 @@
           <div class="filtros-grid">
             <!-- Estado SLA (Cumplimiento) -->
             <div class="filtros-group">
-              <label class="filtros-label">
+              <label for="sla-filter-bar-estado-sla-cumplimiento" class="filtros-label">
                 <q-icon name="trending_up" size="18px" class="q-mr-xs" />
                 Estado SLA (Cumplimiento)
               </label>
               <q-select
+                for="sla-filter-bar-estado-sla-cumplimiento"
                 outlined
                 dense
                 v-model="estadoCumplimientoSla"
@@ -147,11 +150,12 @@
 
             <!-- Estado de la Solicitud -->
             <div class="filtros-group">
-              <label class="filtros-label">
+              <label for="sla-filter-bar-estado-de-la-solicitud" class="filtros-label">
                 <q-icon name="assignment_turned_in" size="18px" class="q-mr-xs" />
                 Estado de la Solicitud
               </label>
               <q-select
+                for="sla-filter-bar-estado-de-la-solicitud"
                 outlined
                 dense
                 v-model="estadoSolicitud"
@@ -168,11 +172,12 @@
         <!-- Tab: Códigos SLA -->
         <div v-else-if="tabActivo === 'codigos'" key="codigos" class="filtros-content">
           <div class="filtros-group">
-            <label class="filtros-label">
+            <label for="sla-filter-bar-codigos-sla-seleccion-multiple" class="filtros-label">
               <q-icon name="tag" size="18px" class="q-mr-xs" />
               Códigos SLA (Selección múltiple)
             </label>
             <q-select
+              for="sla-filter-bar-codigos-sla-seleccion-multiple"
               outlined
               dense
               v-model="codigoSla"
@@ -369,7 +374,7 @@ const limpiarFiltros = () => {
 }
 
 onMounted(() => {
-  loadCodigosSla()
+  void loadCodigosSla()
 })
 </script>
 

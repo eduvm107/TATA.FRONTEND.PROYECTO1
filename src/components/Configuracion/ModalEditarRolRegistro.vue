@@ -23,10 +23,11 @@
         <form @submit.prevent="handleSubmit" class="form-grid">
           <!-- Nombre Rol -->
           <div class="form-group span-full">
-            <label class="form-label">
+            <label for="modal-editar-rol-registro-nombre-del-rol" class="form-label">
               Nombre del Rol <span class="required">*</span>
             </label>
             <q-input
+              for="modal-editar-rol-registro-nombre-del-rol"
               v-model="formData.nombreRol"
               outlined
               dense
@@ -41,10 +42,11 @@
 
           <!-- Bloque Tech -->
           <div class="form-group span-full">
-            <label class="form-label">
+            <label for="modal-editar-rol-registro-bloque-tecnologico" class="form-label">
               Bloque Tecnológico <span class="required">*</span>
             </label>
             <q-select
+              for="modal-editar-rol-registro-bloque-tecnologico"
               v-model="formData.bloqueTech"
               outlined
               dense
@@ -81,10 +83,11 @@
 
           <!-- Descripción -->
           <div class="form-group span-full">
-            <label class="form-label">
+            <label for="modal-editar-rol-registro-descripcion" class="form-label">
               Descripción
             </label>
             <q-input
+              for="modal-editar-rol-registro-descripcion"
               v-model="formData.descripcion"
               outlined
               dense
@@ -102,7 +105,7 @@
           <div class="form-group span-full">
             <div class="toggle-container">
               <div class="toggle-info">
-                <label class="form-label">Estado Activo</label>
+                <div class="form-label">Estado Activo</div>
                 <p class="toggle-description">
                   Indica si este rol de registro está activo y disponible
                 </p>

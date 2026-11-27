@@ -25,12 +25,13 @@
       <q-card-section class="export-dialog-body">
         <!-- Sección: Fechas -->
         <div class="export-dialog-section">
-          <label class="export-dialog-label">
+          <label for="sla-export-dialog-rango-de-fecha-de-solicitud" class="export-dialog-label">
             <q-icon name="event" size="20px" class="q-mr-xs" />
             Rango de Fecha de Solicitud
           </label>
           <div class="export-dialog-date-range">
             <q-input
+              for="sla-export-dialog-rango-de-fecha-de-solicitud"
               outlined
               dense
               v-model="filtrosExportacion.fechaSolicitudDesde"
@@ -50,12 +51,13 @@
         </div>
 
         <div class="export-dialog-section">
-          <label class="export-dialog-label">
+          <label for="sla-export-dialog-rango-de-fecha-de-ingreso-opcional" class="export-dialog-label">
             <q-icon name="login" size="20px" class="q-mr-xs" />
             Rango de Fecha de Ingreso (Opcional)
           </label>
           <div class="export-dialog-date-range">
             <q-input
+              for="sla-export-dialog-rango-de-fecha-de-ingreso-opcional"
               outlined
               dense
               v-model="filtrosExportacion.fechaIngresoDesde"
@@ -78,11 +80,12 @@
 
         <!-- Sección: Estados -->
         <div class="export-dialog-section">
-          <label class="export-dialog-label">
+          <label for="sla-export-dialog-estado-de-cumplimiento-sla" class="export-dialog-label">
             <q-icon name="trending_up" size="20px" class="q-mr-xs" />
             Estado de Cumplimiento SLA
           </label>
           <q-select
+            for="sla-export-dialog-estado-de-cumplimiento-sla"
             outlined
             dense
             v-model="filtrosExportacion.estadoCumplimientoSla"
@@ -95,11 +98,12 @@
         </div>
 
         <div class="export-dialog-section">
-          <label class="export-dialog-label">
+          <label for="sla-export-dialog-estado-de-la-solicitud" class="export-dialog-label">
             <q-icon name="assignment_turned_in" size="20px" class="q-mr-xs" />
             Estado de la Solicitud
           </label>
           <q-select
+            for="sla-export-dialog-estado-de-la-solicitud"
             outlined
             dense
             v-model="filtrosExportacion.estadoSolicitud"
@@ -113,11 +117,12 @@
 
         <!-- Sección: Rol de Registro -->
         <div class="export-dialog-section">
-          <label class="export-dialog-label">
+          <label for="sla-export-dialog-rol-de-registro-opcional" class="export-dialog-label">
             <q-icon name="badge" size="20px" class="q-mr-xs" />
             Rol de Registro (Opcional)
           </label>
           <q-select
+            for="sla-export-dialog-rol-de-registro-opcional"
             outlined
             dense
             v-model="filtrosExportacion.rolesRegistro"
@@ -362,7 +367,7 @@ watch(show, (newVal) => {
 })
 
 onMounted(() => {
-  loadRolesRegistro()
+  void loadRolesRegistro()
 })
 </script>
 

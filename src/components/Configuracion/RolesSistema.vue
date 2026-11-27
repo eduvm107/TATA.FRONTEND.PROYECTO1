@@ -246,7 +246,7 @@ const confirmDelete = (rol) => {
 
 // Lifecycle
 onMounted(() => {
-  fetchRoles()
+  void fetchRoles()
 })
 </script>
 

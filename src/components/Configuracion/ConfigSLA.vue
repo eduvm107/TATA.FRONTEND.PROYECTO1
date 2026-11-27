@@ -283,7 +283,7 @@ const confirmDelete = (config) => {
 
 // Lifecycle
 onMounted(() => {
-  fetchConfigs()
+  void fetchConfigs()
 })
 </script>
 

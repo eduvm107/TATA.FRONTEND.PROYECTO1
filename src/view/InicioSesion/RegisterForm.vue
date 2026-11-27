@@ -175,7 +175,7 @@ export default {
       }
 
       // VALIDACIÓN: correo inválido
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      const emailRegex = /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+$/
       if (!emailRegex.test(this.correo)) {
         this.$q.notify({
           type: 'negative',

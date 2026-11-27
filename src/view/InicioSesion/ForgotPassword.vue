@@ -334,7 +334,7 @@ export default {
       }
 
       // Validar formato de email
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      const emailRegex = /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+$/
       if (!emailRegex.test(this.email)) {
         return this.$q.notify({
           type: 'warning',

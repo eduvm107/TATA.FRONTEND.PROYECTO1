@@ -767,8 +767,8 @@ const verReporte = async () => {
       if (!s.fechaSolicitud) return false
       // Extraer año y mes directamente del string para evitar problemas de timezone
       const [anioStr, mesStr] = s.fechaSolicitud.split('-')
-      const anioFecha = parseInt(anioStr, 10)
-      const mesFecha = parseInt(mesStr, 10)
+      const anioFecha = Number.parseInt(anioStr, 10)
+      const mesFecha = Number.parseInt(mesStr, 10)
       return anioFecha === filtros.value.anio && mesFecha === mesNumero
     })
 
@@ -861,7 +861,7 @@ const verReporte = async () => {
         sla = 100
       } else {
         // Calcular porcentaje
-        sla = parseFloat(((cumplen / total) * 100).toFixed(2))
+        sla = Number.parseFloat(((cumplen / total) * 100).toFixed(2))
       }
 
       return {
@@ -880,7 +880,7 @@ const verReporte = async () => {
     const totalRecursos = rolesConRecursos.reduce((acc, f) => acc + f.numRecursos, 0)
     const promedioSla =
       rolesConRecursos.length > 0
-        ? parseFloat(
+        ? Number.parseFloat(
             (rolesConRecursos.reduce((acc, f) => acc + f.sla, 0) / rolesConRecursos.length).toFixed(
               2,
             ),
@@ -969,13 +969,13 @@ const crearGrafico = () => {
   const dataCumple = dataBruto.map((val, idx) => {
     const fila = filasConDatos[idx]
     if (fila.numRecursos === 0 || val === 'NA') return 0
-    return parseFloat((val * (fila.cumplen / fila.numRecursos) || 0).toFixed(2))
+    return Number.parseFloat((val * (fila.cumplen / fila.numRecursos) || 0).toFixed(2))
   })
 
   const dataNoCumple = dataBruto.map((val, idx) => {
     const fila = filasConDatos[idx]
     if (fila.numRecursos === 0 || val === 'NA') return 0
-    return parseFloat((val * (fila.noCumplen / fila.numRecursos) || 0).toFixed(2))
+    return Number.parseFloat((val * (fila.noCumplen / fila.numRecursos) || 0).toFixed(2))
   })
 
   // console.log('Creando Chart con datos:', { labels, dataCumple, dataNoCumple, numRecursos })
@@ -1139,8 +1139,8 @@ const _crearGraficoResumen = () => {
     const ctx = canvasElement.getContext('2d')
 
     const promedio = typeof resumen.value.promedioSla === 'number' ? resumen.value.promedioSla : 0
-    const cumple = Math.max(0, Math.min(100, parseFloat(promedio.toFixed(2))))
-    const noCumple = parseFloat((100 - cumple).toFixed(2))
+    const cumple = Math.max(0, Math.min(100, Number.parseFloat(promedio.toFixed(2))))
+    const noCumple = Number.parseFloat((100 - cumple).toFixed(2))
 
     pieChartInstance = new Chart(ctx, {
       type: 'doughnut',
@@ -2147,7 +2147,6 @@ const generarPdfBase64 = async () => {
 :deep(.filter-button.q-btn--outline:hover:before),
 :deep(.filter-button.q-btn--outline:focus:before),
 :deep(.filter-button.q-btn--outline:active:before) {
-  border-color: #ab4545 !important;
   border: 0px solid !important;
 }
 .chip-padding {

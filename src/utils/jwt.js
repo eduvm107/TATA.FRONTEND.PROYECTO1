@@ -61,9 +61,9 @@ export function getUserIdFromToken() {
   // Convertir a número si es string
   if (idValue === null) return null
 
-  const userId = typeof idValue === 'string' ? parseInt(idValue, 10) : idValue
+  const userId = typeof idValue === 'string' ? Number.parseInt(idValue, 10) : idValue
 
-  return isNaN(userId) ? null : userId
+  return Number.isNaN(Number(userId)) ? null : userId
 }
 
 /**
@@ -80,9 +80,9 @@ export function getUserIdFromLocalStorage() {
     if (!authUser?.idUsuario) return null
 
     const userId =
-      typeof authUser.idUsuario === 'string' ? parseInt(authUser.idUsuario, 10) : authUser.idUsuario
+      typeof authUser.idUsuario === 'string' ? Number.parseInt(authUser.idUsuario, 10) : authUser.idUsuario
 
-    return isNaN(userId) ? null : userId
+    return Number.isNaN(Number(userId)) ? null : userId
   } catch (error) {
     console.error('❌ Error al obtener idUsuario de localStorage:', error)
     return null

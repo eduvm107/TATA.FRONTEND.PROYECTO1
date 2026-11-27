@@ -10,8 +10,9 @@
       <q-form @submit="handleEnviarComunicado" class="q-gutter-md">
         <!-- Campo 1: Plantilla -->
         <div>
-          <label class="text-weight-medium text-body2 q-mb-xs block">Plantilla</label>
+          <label for="formulario-comunicado-plantilla" class="text-weight-medium text-body2 q-mb-xs block">Plantilla</label>
           <q-select
+            for="formulario-comunicado-plantilla"
             outlined
             v-model="comunicado.plantilla"
             :options="opcionesPlantillas"
@@ -28,11 +29,12 @@
 
         <!-- Campo 2: Asunto -->
         <div>
-          <label class="text-weight-bold text-body2 q-mb-xs block">
+          <label for="formulario-comunicado-asunto" class="text-weight-bold text-body2 q-mb-xs block">
             Asunto
             <span class="text-negative">*</span>
           </label>
           <q-input
+            for="formulario-comunicado-asunto"
             outlined
             v-model="comunicado.asunto"
             placeholder="Ej: Reunión de seguimiento SLA1 - Urgente"
@@ -47,7 +49,7 @@
 
         <!-- Campo 3: Cuerpo del mensaje -->
         <div>
-          <label class="text-weight-bold text-body2 q-mb-xs block">Cuerpo del mensaje</label>
+          <div class="text-weight-bold text-body2 q-mb-xs block">Cuerpo del mensaje</div>
 
           <!-- Toolbar del editor -->
           <div class="editor-toolbar">

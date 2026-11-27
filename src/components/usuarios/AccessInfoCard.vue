@@ -12,7 +12,7 @@
     <div class="card-content">
       <!-- Correo Corporativo -->
       <div class="info-field">
-        <label class="field-label">Correo corporativo</label>
+        <label for="access-info-card-correo" class="field-label">Correo corporativo</label>
 
         <!-- Modo normal -->
         <div v-if="!editMode" class="field-value">
@@ -22,6 +22,7 @@
 
         <!-- Modo edición -->
         <q-input
+          for="access-info-card-correo"
           v-else
           v-model="emailEditado"
           outlined
@@ -38,7 +39,7 @@
 
       <!-- Rol del Sistema -->
       <div class="info-field">
-        <label class="field-label">Rol del Sistema</label>
+        <div class="field-label">Rol del Sistema</div>
         <div class="field-value">
           <q-icon name="admin_panel_settings" size="18px" color="primary" />
           {{ rolNombre }}
@@ -47,7 +48,7 @@
 
       <!-- Estado de Cuenta -->
       <div class="info-field">
-        <label class="field-label">Estado de Cuenta</label>
+        <div class="field-label">Estado de Cuenta</div>
         <div class="field-value">
           <div class="status-indicator" :class="estadoClass">
             <div class="status-dot"></div>

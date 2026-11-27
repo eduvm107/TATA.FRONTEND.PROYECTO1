@@ -286,7 +286,7 @@ onMounted(() => {
   form.value = { ...slaStore.configuracion }
 
   // Cargar historial
-  cargarHistorial()
+  void cargarHistorial()
 })
 </script>
 

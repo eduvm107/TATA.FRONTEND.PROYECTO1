@@ -829,7 +829,7 @@ const verificarCorreoCorporativoDisponible = async () => {
   const correoTrimmed = formUsuario.value.correoCorporativo.trim()
 
   // Validar formato básico de email
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const emailRegex = /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+$/
   if (!emailRegex.test(correoTrimmed)) {
     return // No verificar si el formato es inválido
   }
@@ -942,7 +942,7 @@ const guardarUsuario = async () => {
       })
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const emailRegex = /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+$/
     if (!emailRegex.test(formUsuario.value.correoCorporativo)) {
       return $q.notify({
         type: 'warning',

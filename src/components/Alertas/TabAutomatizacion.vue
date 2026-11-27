@@ -11,13 +11,14 @@
         <q-form @submit="guardarConfiguracion" class="q-gutter-lg">
           <!-- Campo 1: Selección de Destinatario -->
           <div class="form-field">
-            <label class="text-weight-bold text-body2 q-mb-md block">
+            <label for="tab-automatizacion-destinatario-del-resumen" class="text-weight-bold text-body2 q-mb-md block">
               📧 Destinatario del Resumen
               <span class="text-negative">*</span>
             </label>
 
             <!-- Select con carga dinámica -->
             <q-select
+              for="tab-automatizacion-destinatario-del-resumen"
               v-model="idUsuarioSeleccionado"
               :options="opcionesUsuarios"
               option-value="value"
@@ -160,8 +161,9 @@
             <!-- Sub-elemento condicional: Hora de envío -->
             <transition name="fade">
               <div v-if="configuracion.resumenDiario" class="hora-envio q-mt-md q-ml-md">
-                <label class="text-weight-medium text-body2 q-mb-xs block"> Hora de envío </label>
+                <label for="tab-automatizacion-hora-de-envio" class="text-weight-medium text-body2 q-mb-xs block"> Hora de envío </label>
                 <q-input
+                  for="tab-automatizacion-hora-de-envio"
                   outlined
                   v-model="configuracion.horaResumen"
                   readonly
@@ -564,7 +566,7 @@ const probarEnvio = async () => {
 // Watcher: Cuando se selecciona un usuario, obtener su nombre desde la API de personal
 watch(idUsuarioSeleccionado, (nuevoId) => {
   if (nuevoId !== null) {
-    obtenerNombrePersonal(nuevoId)
+    void obtenerNombrePersonal(nuevoId)
   } else {
     nombreCompletoPersonal.value = ''
   }
@@ -572,7 +574,7 @@ watch(idUsuarioSeleccionado, (nuevoId) => {
 
 // Cargar configuración al montar el componente
 onMounted(() => {
-  cargarConfiguracion()
+  void cargarConfiguracion()
 })
 </script>
 

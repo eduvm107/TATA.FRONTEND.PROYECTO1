@@ -12,13 +12,13 @@
     <div class="card-content">
       <!-- Nombre Completo -->
       <div class="info-field">
-        <label class="field-label">Nombre Completo</label>
+        <div class="field-label">Nombre Completo</div>
         <div class="field-value">{{ nombreCompleto }}</div>
       </div>
 
       <!-- Documento de Identidad -->
       <div class="info-field">
-        <label class="field-label">Documento de Identidad</label>
+        <div class="field-label">Documento de Identidad</div>
         <div class="field-value">{{ documento }}</div>
       </div>
     </div>
