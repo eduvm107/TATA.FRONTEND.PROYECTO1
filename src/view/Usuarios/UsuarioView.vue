@@ -58,7 +58,6 @@
 import { ref, onMounted } from 'vue'
 import { useQuasar } from 'quasar'
 //import { useRouter } from 'vue-router'
-import axios from 'axios'
 import { api } from 'boot/axios'
 import UserHeader from 'src/components/usuarios/UserHeader.vue'
 import UserInfoCard from 'src/components/usuarios/UserInfoCard.vue'
@@ -274,8 +273,8 @@ const confirmarCambioEmail = async (password) => {
 
     // POST /api/Usuario/signin para validar contraseña (sin token)
     try {
-      await axios.post(
-        'http://localhost:5260/api/Usuario/signin',
+      await api.post(
+        '/api/Usuario/signin',
         {
           email: correoParaValidar,
           password: password,
