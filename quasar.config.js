@@ -50,7 +50,10 @@ export default defineConfig((/* ctx */) => {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      // URL del API Gateway, inyectada en build time (CI) via la env var API_URL. Sin localhost fijo.
+      env: {
+        API_URL: process.env.API_URL || 'http://localhost:5260',
+      },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,

@@ -1,7 +1,9 @@
 import { defineBoot } from '#q-app/wrappers'
 import axios from 'axios'
+import { Notify } from 'quasar'
 
-const api = axios.create({ baseURL: 'http://localhost:5260' })
+// Inyectada en build time (quasar.config.js -> build.env.API_URL). Sin localhost fijo.
+const api = axios.create({ baseURL: process.env.API_URL })
 
 // Agregar interceptor para incluir token de autenticación
 api.interceptors.request.use(
@@ -59,6 +61,38 @@ api.interceptors.response.use(
     const config = error.config
 
     if (status === 401) {
+      // Authorizer/backend nuevos: 401 con { error_code } (ver RFC de sesión Redis).
+      const errorCode = error.response?.data?.error_code
+
+      if (errorCode) {
+        const mensajesPorCodigo = {
+          TOKEN_EXPIRED: 'Tu sesión expiró. Vuelve a iniciar sesión.',
+          SESSION_EXPIRED: 'Tu sesión expiró. Vuelve a iniciar sesión.',
+          SESSION_NOT_FOUND: 'Tu sesión ya no es válida. Vuelve a iniciar sesión.',
+          TOKEN_INVALID: 'Tu sesión no es válida. Vuelve a iniciar sesión.',
+          AUTH_UNAVAILABLE: 'Servicio de autenticación no disponible. Intenta de nuevo en unos minutos.',
+        }
+
+        Notify.create({
+          type: 'negative',
+          message: mensajesPorCodigo[errorCode] || 'Tu sesión expiró. Vuelve a iniciar sesión.',
+        })
+
+        // AUTH_UNAVAILABLE no implica sesión inválida: no se cierra sesión por una falla temporal del authorizer.
+        if (errorCode !== 'AUTH_UNAVAILABLE') {
+          const { useAuthStore } = await import('src/stores/useAuthStore')
+          const authStore = useAuthStore()
+          authStore.clearAuth()
+
+          const currentPath = window.location.pathname
+          if (currentPath !== '/' && currentPath !== '/login') {
+            window.location.href = '/login'
+          }
+        }
+
+        return Promise.reject(error)
+      }
+
       // Token expirado o inválido
       // console.warn('🔒 Token expirado o inválido (401)', {
       //   url: config?.url,

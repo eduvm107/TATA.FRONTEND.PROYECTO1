@@ -365,7 +365,16 @@ export default {
     irAPerfil() {
       this.$router.push('/sistema/usuario')
     },
-    cerrarSesion() {
+    async cerrarSesion() {
+      // Avisar al backend para que borre la sesión en Redis (antes de limpiar
+      // el token: la llamada necesita el Authorization: Bearer todavía presente).
+      // No bloquea el logout si falla (p. ej. backend caído).
+      try {
+        await this.$api.post('/api/usuario/logout')
+      } catch {
+        // console.warn('No se pudo notificar el logout al backend')
+      }
+
       // Limpiar sesión completa
       this.authStore.clearAuth()
 
