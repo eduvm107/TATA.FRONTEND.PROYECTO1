@@ -177,6 +177,18 @@ export default {
         // Guardar token, usuario y permisos usando el nuevo método setAuth
         authStore.setAuth(response.data)
 
+        // Canjear (un solo uso) el ticket de la sesión recién creada en Redis.
+        // No bloquea el login si falla: el usuario ya tiene un JWT válido.
+        if (response.data.ticket) {
+          try {
+            await this.$api.post('/api/usuario/confirmar-sesion', {
+              ticket: response.data.ticket,
+            })
+          } catch {
+            // console.warn('No se pudo confirmar el ticket de sesión')
+          }
+        }
+
         // console.log('✅ Sesión iniciada exitosamente')
         // console.log('Usuario:', response.data.username)
         // console.log('Rol:', response.data.rolNombre)
