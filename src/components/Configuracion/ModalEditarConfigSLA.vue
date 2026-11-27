@@ -23,10 +23,11 @@
         <form @submit.prevent="handleSubmit" class="form-grid">
           <!-- Código SLA -->
           <div class="form-group">
-            <label class="form-label">
+            <label for="modal-editar-config-sla-codigo-sla" class="form-label">
               Código SLA <span class="required">*</span>
             </label>
             <q-input
+              for="modal-editar-config-sla-codigo-sla"
               v-model="formData.codigoSla"
               outlined
               dense
@@ -41,10 +42,11 @@
 
           <!-- Días Umbral -->
           <div class="form-group">
-            <label class="form-label">
+            <label for="modal-editar-config-sla-dias-umbral" class="form-label">
               Días Umbral <span class="required">*</span>
             </label>
             <q-input
+              for="modal-editar-config-sla-dias-umbral"
               v-model.number="formData.diasUmbral"
               outlined
               dense
@@ -61,10 +63,11 @@
 
           <!-- Tipo de Solicitud -->
           <div class="form-group span-full">
-            <label class="form-label">
+            <label for="modal-editar-config-sla-tipo-de-solicitud" class="form-label">
               Tipo de Solicitud <span class="required">*</span>
             </label>
             <q-select
+              for="modal-editar-config-sla-tipo-de-solicitud"
               v-model="formData.tipoSolicitud"
               outlined
               dense
@@ -100,10 +103,11 @@
 
           <!-- Descripción -->
           <div class="form-group span-full">
-            <label class="form-label">
+            <label for="modal-editar-config-sla-descripcion" class="form-label">
               Descripción
             </label>
             <q-input
+              for="modal-editar-config-sla-descripcion"
               v-model="formData.descripcion"
               outlined
               dense
@@ -120,7 +124,7 @@
           <div class="form-group span-full">
             <div class="toggle-container">
               <div class="toggle-info">
-                <label class="form-label">Estado Activo</label>
+                <div class="form-label">Estado Activo</div>
                 <p class="toggle-description">
                   Indica si esta configuración está activa y aplicable
                 </p>

@@ -314,7 +314,7 @@ const limpiarFiltros = () => {
   }
 
   // Recargar dashboard con filtros por defecto
-  cargarDashboard()
+  void cargarDashboard()
 
   $q.notify({
     type: 'info',

@@ -510,8 +510,8 @@ const slaUnicos = computed(() => {
   const slas = [...new Set(props.predicciones.map(p => p.codigoSla))]
   // Ordenar SLAs numéricamente (SLA1, SLA2, SLA3, etc.)
   const slasOrdenados = slas.filter(Boolean).sort((a, b) => {
-    const numA = parseInt(a.replace('SLA', '')) || 0
-    const numB = parseInt(b.replace('SLA', '')) || 0
+    const numA = Number.parseInt(a.replace('SLA', '')) || 0
+    const numB = Number.parseInt(b.replace('SLA', '')) || 0
     return numA - numB
   })
   return ['Todos', ...slasOrdenados]
@@ -521,8 +521,8 @@ const estadosCumplimientoUnicos = computed(() => {
   const estados = [...new Set(props.predicciones.map(p => p.estadoCumplimientoSla))]
   // Ordenar estados numéricamente (EN_PROCESO_SLA1, EN_PROCESO_SLA2, etc.)
   const estadosOrdenados = estados.filter(Boolean).sort((a, b) => {
-    const numA = parseInt(a.match(/SLA(\d+)/)?.[1]) || 0
-    const numB = parseInt(b.match(/SLA(\d+)/)?.[1]) || 0
+    const numA = Number.parseInt(a.match(/SLA(\d+)/)?.[1]) || 0
+    const numB = Number.parseInt(b.match(/SLA(\d+)/)?.[1]) || 0
     return numA - numB
   })
   return ['Todos', ...estadosOrdenados]

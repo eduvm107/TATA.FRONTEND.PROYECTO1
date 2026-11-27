@@ -837,8 +837,8 @@ const cargarConfiguracionesIniciales = async () => {
       tiposSlaDisponibles.value = [
         ...new Set(configSla.filter((c) => c.esActivo).map((c) => c.codigoSla)),
       ].sort((a, b) => {
-        const numA = parseInt(a.replace(/\D/g, ''), 10)
-        const numB = parseInt(b.replace(/\D/g, ''), 10)
+        const numA = Number.parseInt(a.replace(/\D/g, ''), 10)
+        const numB = Number.parseInt(b.replace(/\D/g, ''), 10)
         return numA - numB
       })
     }
@@ -913,7 +913,7 @@ const procesarGraficosPorRol = async (solicitudes, tiposSlaProcesar, configsSla,
 
         return {
           nombre: codigoSla,
-          porcentaje: parseFloat(porcentaje.toFixed(1)),
+          porcentaje: Number.parseFloat(porcentaje.toFixed(1)),
           total: totalSla,
           cumplidos: cumplenSla,
           noCumplen: noCumplenSla,
@@ -962,7 +962,7 @@ const procesarGraficosPorRol = async (solicitudes, tiposSlaProcesar, configsSla,
             label: 'Proceso',
             data: cumplimientoPorSla.map((s) =>
               usarPorcentaje
-                ? parseFloat(((s.proceso / s.total) * 100).toFixed(1))
+                ? Number.parseFloat(((s.proceso / s.total) * 100).toFixed(1))
                 : s.proceso || 0,
             ),
             backgroundColor: esArea || esLinea ? 'rgba(255, 152, 0, 0.5)' : '#FF9800',
@@ -976,7 +976,7 @@ const procesarGraficosPorRol = async (solicitudes, tiposSlaProcesar, configsSla,
             label: 'No cumple',
             data: cumplimientoPorSla.map((s) =>
               usarPorcentaje
-                ? parseFloat(((s.noCumplen / s.total) * 100).toFixed(1))
+                ? Number.parseFloat(((s.noCumplen / s.total) * 100).toFixed(1))
                 : s.noCumplen || 0,
             ),
             backgroundColor: esArea || esLinea ? 'rgba(244, 67, 54, 0.5)' : '#F44336',
@@ -1014,7 +1014,7 @@ const procesarGraficosPorRol = async (solicitudes, tiposSlaProcesar, configsSla,
 
   estadisticas.value.totalSolicitudes = totalSolicitudesGlobal
   estadisticas.value.promedioSla =
-    graficos.value.length > 0 ? parseFloat((sumaPromedios / graficos.value.length).toFixed(1)) : 0
+    graficos.value.length > 0 ? Number.parseFloat((sumaPromedios / graficos.value.length).toFixed(1)) : 0
   estadisticas.value.rolesAnalizados = totalSlasAnalizados
 }
 
@@ -1177,7 +1177,7 @@ const aplicarFiltros = async () => {
 
             return {
               nombre: rol.nombreRol,
-              porcentaje: parseFloat(porcentaje.toFixed(1)),
+              porcentaje: Number.parseFloat(porcentaje.toFixed(1)),
               total: totalRol,
               cumplidos: cumplenRol,
               noCumplen: noCumplenRol,
@@ -1216,7 +1216,7 @@ const aplicarFiltros = async () => {
                   label: 'Proceso',
                   data: cumplimientoPorRol.map((r) =>
                     usarPorcentaje
-                      ? parseFloat(((r.proceso / r.total) * 100).toFixed(1))
+                      ? Number.parseFloat(((r.proceso / r.total) * 100).toFixed(1))
                       : r.proceso || 0,
                   ),
                   borderColor: '#FF9800',
@@ -1233,7 +1233,7 @@ const aplicarFiltros = async () => {
                   label: 'No_cumple',
                   data: cumplimientoPorRol.map((r) =>
                     usarPorcentaje
-                      ? parseFloat(((r.noCumplen / r.total) * 100).toFixed(1))
+                      ? Number.parseFloat(((r.noCumplen / r.total) * 100).toFixed(1))
                       : r.noCumplen || 0,
                   ),
                   borderColor: '#F44336',
@@ -1289,7 +1289,7 @@ const aplicarFiltros = async () => {
                   label: 'Proceso',
                   data: cumplimientoPorRol.map((r) =>
                     usarPorcentaje
-                      ? parseFloat(((r.proceso / r.total) * 100).toFixed(1))
+                      ? Number.parseFloat(((r.proceso / r.total) * 100).toFixed(1))
                       : r.proceso || 0,
                   ),
                   backgroundColor: esArea ? 'rgba(255, 152, 0, 0.5)' : '#FF9800',
@@ -1303,7 +1303,7 @@ const aplicarFiltros = async () => {
                   label: 'No cumple',
                   data: cumplimientoPorRol.map((r) =>
                     usarPorcentaje
-                      ? parseFloat(((r.noCumplen / r.total) * 100).toFixed(1))
+                      ? Number.parseFloat(((r.noCumplen / r.total) * 100).toFixed(1))
                       : r.noCumplen || 0,
                   ),
                   backgroundColor: esArea ? 'rgba(244, 67, 54, 0.5)' : '#F44336',
@@ -1343,7 +1343,7 @@ const aplicarFiltros = async () => {
       estadisticas.value.totalSolicitudes = totalSolicitudesGlobal
       estadisticas.value.promedioSla =
         graficos.value.length > 0
-          ? parseFloat((sumaPromedios / graficos.value.length).toFixed(1))
+          ? Number.parseFloat((sumaPromedios / graficos.value.length).toFixed(1))
           : 0
       estadisticas.value.rolesAnalizados = totalRolesAnalizados
     }
@@ -1846,7 +1846,7 @@ const crearGraficoUnificado = () => {
     const labels = graficos.value.map((g) => g.codigoSla)
     const data = graficos.value.map((g) => {
       const promedio = g.datosRoles.reduce((sum, r) => sum + r.porcentaje, 0) / g.datosRoles.length
-      return parseFloat(promedio.toFixed(1))
+      return Number.parseFloat(promedio.toFixed(1))
     })
 
     const usuariosTotales = graficos.value.map((g) => {
@@ -2018,7 +2018,7 @@ const seleccionarTodo = () => {
 
 const confirmarExportacion = () => {
   dialogoExportacion.value = false
-  exportarPDF()
+  void exportarPDF()
 }
 
 const exportarPDF = async () => {

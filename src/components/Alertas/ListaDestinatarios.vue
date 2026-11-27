@@ -10,10 +10,11 @@
       <!-- Filtros -->
       <div class="filtros-destinatarios q-mb-md">
         <div class="q-mb-sm">
-          <label class="text-caption text-weight-medium text-grey-8 q-mb-xs block">
+          <label for="lista-destinatarios-tipo-sla" class="text-caption text-weight-medium text-grey-8 q-mb-xs block">
             Tipo SLA
           </label>
           <q-select
+            for="lista-destinatarios-tipo-sla"
             outlined
             v-model="filtros.sla"
             :options="opcionesTipoSla"
@@ -26,8 +27,9 @@
           />
         </div>
         <div>
-          <label class="text-caption text-weight-medium text-grey-8 q-mb-xs block"> Rol </label>
+          <label for="lista-destinatarios-rol" class="text-caption text-weight-medium text-grey-8 q-mb-xs block"> Rol </label>
           <q-select
+            for="lista-destinatarios-rol"
             outlined
             v-model="filtros.rol"
             :options="opcionesRol"
@@ -50,7 +52,7 @@
 
       <!-- Lista de Vista Previa -->
       <div class="q-mb-sm">
-        <label class="text-caption text-weight-medium text-grey-8">Vista Previa</label>
+        <div class="text-caption text-weight-medium text-grey-8">Vista Previa</div>
       </div>
       <div class="lista-usuarios">
         <!-- Estado de carga -->

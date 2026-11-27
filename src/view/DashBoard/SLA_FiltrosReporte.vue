@@ -426,8 +426,8 @@ const tiposSlaConDatos = computed(() => {
     .filter((tipo) => datosPorTipo.value[tipo]?.total > 0)
     .sort((a, b) => {
       // Extraer el número del código (ej: "SLA1" -> 1)
-      const numA = parseInt(a.replace(/\D/g, ''), 10)
-      const numB = parseInt(b.replace(/\D/g, ''), 10)
+      const numA = Number.parseInt(a.replace(/\D/g, ''), 10)
+      const numB = Number.parseInt(b.replace(/\D/g, ''), 10)
       return numA - numB // Orden ascendente: SLA1, SLA2, SLA3, etc.
     })
 })
@@ -492,8 +492,8 @@ const cargarConfiguracionesIniciales = async () => {
         ...new Set(configSla.filter((c) => c.esActivo).map((c) => c.codigoSla)),
       ].sort((a, b) => {
         // Extraer el número del código (ej: "SLA1" -> 1)
-        const numA = parseInt(a.replace(/\D/g, ''), 10)
-        const numB = parseInt(b.replace(/\D/g, ''), 10)
+        const numA = Number.parseInt(a.replace(/\D/g, ''), 10)
+        const numB = Number.parseInt(b.replace(/\D/g, ''), 10)
         return numA - numB // Orden ascendente: SLA1, SLA2, SLA3, etc.
       })
       tiposSlaDisponibles.value = codigosUnicos
@@ -662,7 +662,7 @@ const aplicarFiltros = async () => {
     }).length
 
     kpis.value.slaGlobal =
-      totalSolicitudes > 0 ? parseFloat(((totalCumplidas / totalSolicitudes) * 100).toFixed(1)) : 0
+      totalSolicitudes > 0 ? Number.parseFloat(((totalCumplidas / totalSolicitudes) * 100).toFixed(1)) : 0
 
     // Mejor y peor rol (de todos los roles combinados)
     const todosLosCumplimientos = []
@@ -673,6 +673,7 @@ const aplicarFiltros = async () => {
     if (todosLosCumplimientos.length > 0) {
       const mejorRolData = todosLosCumplimientos.reduce((max, rol) =>
         rol.porcentaje > max.porcentaje ? rol : max,
+        todosLosCumplimientos[0],
       )
       kpis.value.mejorRol = {
         nombre: mejorRolData.nombre,
@@ -681,6 +682,7 @@ const aplicarFiltros = async () => {
 
       const peorRolData = todosLosCumplimientos.reduce((min, rol) =>
         rol.porcentaje < min.porcentaje ? rol : min,
+        todosLosCumplimientos[0],
       )
       kpis.value.atencionRequerida = {
         nombre: peorRolData.nombre,
@@ -737,7 +739,7 @@ const aplicarFiltros = async () => {
         }).length
 
         const slaMesAnterior = (cumplidasMesAnterior / totalMesAnterior) * 100
-        kpis.value.variacion = parseFloat((kpis.value.slaGlobal - slaMesAnterior).toFixed(1))
+        kpis.value.variacion = Number.parseFloat((kpis.value.slaGlobal - slaMesAnterior).toFixed(1))
       } else {
         // No hay datos del mes anterior
         kpis.value.variacion = 0
@@ -764,7 +766,7 @@ const restablecerFiltros = () => {
     anio: new Date().getFullYear(),
   }
   rolesSeleccionados.value = []
-  aplicarFiltros()
+  void aplicarFiltros()
 
   $q.notify({
     type: 'info',
@@ -1236,7 +1238,7 @@ onMounted(async () => {
 }
 
 /* Alto contraste y accesibilidad */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
   .kpi-card {
     border-width: 2px;
   }

@@ -13,30 +13,6 @@ api.interceptors.request.use(
       // Validar que el token no esté vacío o corrupto
       if (token.trim().length > 0) {
         config.headers.Authorization = `Bearer ${token}`
-
-        // 📧 Log especial para endpoints de creación de cuenta
-        const isAccountCreation =
-          config.url.includes('/personal/with-account') ||
-          config.url.includes('/vincular-personal') ||
-          config.url.includes('/activar-cuenta')
-
-        if (isAccountCreation) {
-          // console.log('🔐 [CUENTA] Request a endpoint de cuenta:', {
-          //   url: config.url,
-          //   method: config.method,
-          //   hasToken: true,
-          //   tokenLength: token.length,
-          //   data: config.data,
-          // })
-        } else {
-          // console.log('📤 Request con token:', {
-          //   url: config.url,
-          //   method: config.method,
-          //   hasToken: true,
-          //   tokenLength: token.length,
-          //   tokenPreview: token.substring(0, 20) + '...',
-          // })
-        }
       } else {
         // console.error('❌ Token vacío o corrupto en localStorage')
       }
@@ -146,18 +122,7 @@ api.interceptors.response.use(
         }
       } else {
         // Es un endpoint secundario con falta de permisos/claims - NO limpiar sesión
-        if (esFaltaClaim) {
-          // console.log(
-          //   '⚠️ 401 por falta de claim (UserId) en endpoint secundario - NO se limpia sesión',
-          // )
-          // console.log(
-          //   '💡 Sugerencia: El backend requiere claim "UserId" en el JWT para este endpoint',
-          // )
-        } else {
-          // console.log(
-          //   '⚠️ 401 en endpoint secundario - NO se limpia sesión (probablemente falta de permisos)',
-          // )
-        }
+        // Endpoint secundario (falta de permisos o del claim UserId): no se limpia la sesión
       }
     }
 

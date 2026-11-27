@@ -233,7 +233,7 @@ const cargarUsuario = async () => {
 }
 
 onMounted(() => {
-  cargarUsuario()
+  void cargarUsuario()
 })
 
 /* ------------------------------
@@ -407,7 +407,7 @@ const guardarNuevaPassword = async ({ currentPassword, newPassword }) => {
    UTILIDADES
 --------------------------------*/
 const isValidEmail = (email) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const emailRegex = /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+$/
   return emailRegex.test(email)
 }
 </script>

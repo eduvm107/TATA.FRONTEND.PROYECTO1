@@ -23,10 +23,11 @@
         <form @submit.prevent="handleSubmit" class="form-grid">
           <!-- Código -->
           <div class="form-group span-full">
-            <label class="form-label">
+            <label for="modal-editar-roles-sistema-codigo" class="form-label">
               Código <span class="required">*</span>
             </label>
             <q-input
+              for="modal-editar-roles-sistema-codigo"
               v-model="formData.codigo"
               outlined
               dense
@@ -41,10 +42,11 @@
 
           <!-- Nombre -->
           <div class="form-group span-full">
-            <label class="form-label">
+            <label for="modal-editar-roles-sistema-nombre" class="form-label">
               Nombre <span class="required">*</span>
             </label>
             <q-input
+              for="modal-editar-roles-sistema-nombre"
               v-model="formData.nombre"
               outlined
               dense
@@ -59,10 +61,11 @@
 
           <!-- Descripción -->
           <div class="form-group span-full">
-            <label class="form-label">
+            <label for="modal-editar-roles-sistema-descripcion" class="form-label">
               Descripción
             </label>
             <q-input
+              for="modal-editar-roles-sistema-descripcion"
               v-model="formData.descripcion"
               outlined
               dense
@@ -79,7 +82,7 @@
           <div class="form-group span-full">
             <div class="toggle-container">
               <div class="toggle-info">
-                <label class="form-label">Estado Activo</label>
+                <div class="form-label">Estado Activo</div>
                 <p class="toggle-description">
                   Indica si el rol está activo y disponible en el sistema
                 </p>

@@ -152,7 +152,7 @@ const cargarVistaPrevia = async () => {
 watch(
   filtros,
   () => {
-    cargarVistaPrevia()
+    void cargarVistaPrevia()
   },
   { deep: true },
 )
@@ -166,7 +166,7 @@ const eliminarUsuario = (id) => {
 const convertirTextoAHtml = (texto) => {
   if (!texto) return ''
   let html = texto.replace(/\n/g, '<br>')
-  html = html.replace(/^[-•*]\s+(.+)$/gm, '<li>$1</li>')
+  html = html.replace(/^[-•*]\s+(\S.*)$/gm, '<li>$1</li>')
   if (html.includes('<li>')) {
     html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
   }
@@ -181,7 +181,7 @@ const enviarPrueba = (comunicado) => {
     prompt: {
       model: authStore.userEmail || '',
       type: 'email',
-      isValid: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+      isValid: (val) => /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+$/.test(val),
     },
     cancel: {
       label: 'Cancelar',

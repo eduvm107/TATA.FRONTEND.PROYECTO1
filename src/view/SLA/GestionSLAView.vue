@@ -189,7 +189,7 @@ const estadosCumplimientoDisponibles = computed(() => {
       estados.add(estadoBase)
     }
   })
-  return Array.from(estados).sort()
+  return Array.from(estados).sort((a, b) => String(a).localeCompare(String(b)))
 })
 
 /**
@@ -202,7 +202,7 @@ const estadosSolicitudDisponibles = computed(() => {
       estados.add(solicitud.estadoSolicitud)
     }
   })
-  return Array.from(estados).sort()
+  return Array.from(estados).sort((a, b) => String(a).localeCompare(String(b)))
 })
 
 /**

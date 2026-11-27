@@ -645,7 +645,7 @@ const formatearFechaActualizacion = () => {
 
 // Lifecycle
 onMounted(() => {
-  cargarPredicciones()
+  void cargarPredicciones()
 })
 </script>
 

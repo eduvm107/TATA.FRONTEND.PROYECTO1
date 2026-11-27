@@ -56,7 +56,9 @@
           </div>
           <div class="text-caption text-grey-7 q-mb-md">Formato soportado: .xlsx (Excel)</div>
           <q-btn flat color="primary" label="Seleccionar Archivo" @click="triggerFileSelect" />
+          <label for="carga-volumen-archivo-inicial" class="hidden-file-input">Archivo Excel de solicitudes</label>
           <input
+            id="carga-volumen-archivo-inicial"
             ref="fileInputRef"
             type="file"
             class="hidden-file-input"
@@ -124,7 +126,9 @@
               size="sm"
               @click="triggerFileSelect"
             />
+            <label for="carga-volumen-archivo-reemplazo" class="hidden-file-input">Archivo Excel de solicitudes</label>
             <input
+              id="carga-volumen-archivo-reemplazo"
               ref="fileInputRef"
               type="file"
               class="hidden-file-input"

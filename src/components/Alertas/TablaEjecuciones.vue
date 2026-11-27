@@ -247,7 +247,7 @@ const cargarEjecuciones = async () => {
 }
 
 onMounted(() => {
-  cargarEjecuciones()
+  void cargarEjecuciones()
 })
 
 // Exponer método para que el componente padre pueda recargar

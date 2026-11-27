@@ -647,7 +647,7 @@ const limpiarFiltros = () => {
   }
 
   // Recargar alertas con los filtros actualizados
-  cargarAlertas()
+  void cargarAlertas()
 }
 
 /**
@@ -740,7 +740,7 @@ const handleNotificacionEnviada = (_data) => {
   // console.log('✅ Notificación enviada exitosamente:', _data)
 
   // Recargar datos para reflejar cambios
-  cargarAlertas()
+  void cargarAlertas()
 }
 
 /**
@@ -1036,12 +1036,12 @@ watch(
       // Debounce para búsqueda
       if (searchTimeout) clearTimeout(searchTimeout)
       searchTimeout = setTimeout(() => {
-        cargarAlertas()
+        void cargarAlertas()
       }, 500)
     } else {
       // Recarga inmediata para otros filtros
       if (searchTimeout) clearTimeout(searchTimeout)
-      cargarAlertas()
+      void cargarAlertas()
     }
   },
   { deep: true },

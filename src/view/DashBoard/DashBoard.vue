@@ -654,7 +654,7 @@ const tiposSlaDisponiblesFiltrados = computed(() => {
 watch(rolesActivos, (nuevosRoles) => {
   if (JSON.stringify(nuevosRoles.sort()) !== JSON.stringify(rolesSeleccionados.value.sort())) {
     rolesSeleccionados.value = [...nuevosRoles]
-    cargarDashboard()
+    void cargarDashboard()
   }
 })
 
@@ -713,7 +713,7 @@ const cargarRolesDisponibles = () => {
       }))
 
       // Recargar dashboard con los roles correctos
-      cargarDashboard()
+      void cargarDashboard()
     }
   }).catch((error) => {
     console.error('Error al cargar roles:', error)
@@ -791,7 +791,7 @@ const cargarDashboard = async () => {
     const solicitudesCumplen = solicitudesCompletadas.filter((s) => s.cumpleSla).length
     slaGlobal.value =
       totalSolicitudes > 0
-        ? parseFloat(((solicitudesCumplen / totalSolicitudes) * 100).toFixed(1))
+        ? Number.parseFloat(((solicitudesCumplen / totalSolicitudes) * 100).toFixed(1))
         : 0
 
     // Calcular variación con mes anterior
@@ -830,7 +830,7 @@ const cargarDashboard = async () => {
       const slaMesAnterior =
         (solicitudesMesAnterior.filter((s) => s.cumpleSla).length / solicitudesMesAnterior.length) *
         100
-      variacion.value = parseFloat((slaGlobal.value - slaMesAnterior).toFixed(1))
+      variacion.value = Number.parseFloat((slaGlobal.value - slaMesAnterior).toFixed(1))
     } else {
       variacion.value = 0
     }
@@ -854,7 +854,7 @@ const cargarDashboard = async () => {
 
         return {
           nombre: rol.nombreRol,
-          cumplimiento: parseFloat(porcentaje.toFixed(1)),
+          cumplimiento: Number.parseFloat(porcentaje.toFixed(1)),
           total: totalRol,
         }
       })
@@ -882,7 +882,7 @@ const cargarDashboard = async () => {
         const totalTipoSla = solicitudesTipoSla.length
         const cumplenTipoSla = solicitudesTipoSla.filter((s) => s.cumpleSla).length
         const slaPromedio =
-          totalTipoSla > 0 ? parseFloat(((cumplenTipoSla / totalTipoSla) * 100).toFixed(1)) : 0
+          totalTipoSla > 0 ? Number.parseFloat(((cumplenTipoSla / totalTipoSla) * 100).toFixed(1)) : 0
 
         // Calcular estadísticas por estado
         const cumpleCount = solicitudesTipoSla.filter(s => s.estadoSla === 'Cumple').length
@@ -893,9 +893,9 @@ const cargarDashboard = async () => {
           cumple: cumpleCount,
           proceso: procesoCount,
           noCumple: noCumpleCount,
-          cumplePct: totalTipoSla > 0 ? parseFloat(((cumpleCount / totalTipoSla) * 100).toFixed(1)) : 0,
-          procesoPct: totalTipoSla > 0 ? parseFloat(((procesoCount / totalTipoSla) * 100).toFixed(1)) : 0,
-          noCumplePct: totalTipoSla > 0 ? parseFloat(((noCumpleCount / totalTipoSla) * 100).toFixed(1)) : 0
+          cumplePct: totalTipoSla > 0 ? Number.parseFloat(((cumpleCount / totalTipoSla) * 100).toFixed(1)) : 0,
+          procesoPct: totalTipoSla > 0 ? Number.parseFloat(((procesoCount / totalTipoSla) * 100).toFixed(1)) : 0,
+          noCumplePct: totalTipoSla > 0 ? Number.parseFloat(((noCumpleCount / totalTipoSla) * 100).toFixed(1)) : 0
         }
 
         // Calcular cumplimiento por rol para este tipo de SLA
@@ -918,7 +918,7 @@ const cargarDashboard = async () => {
 
             return {
               nombre: rol.nombreRol,
-              cumplimiento: parseFloat(porcentaje.toFixed(1)),
+              cumplimiento: Number.parseFloat(porcentaje.toFixed(1)),
               total: totalRolTipo,
               noCumplen: noCumplenRolTipo,
             }
@@ -963,7 +963,7 @@ const cargarDashboard = async () => {
     await crearGraficoCumplimientoMes(todasSolicitudes, configsSla)
     await crearGraficoIncumplimientoRol(solicitudesConSla, todosRoles, configsSla)
     await crearGraficoDistribucionEstados(solicitudesConSla)
-    await crearGraficoResumenIncumplimientos(tiposSlaDisponibles.value, solicitudesConSla)
+    await crearGraficoResumenIncumplimientos(tiposSlaDisponibles.value)
 
     // Actualizar todos los roles con cantidades
     todosLosRoles.value = todosRoles
@@ -1058,7 +1058,7 @@ const restablecerFiltros = () => {
   // Restablecer SLAs seleccionados (todos)
   slasSeleccionados.value = tiposSlaParaFiltro.value.map(sla => sla.codigo)
 
-  cargarDashboard()
+  void cargarDashboard()
 }
 
 const agregarRol = (rol) => {
@@ -1071,7 +1071,7 @@ const agregarRol = (rol) => {
       rolChip.activo = true
     }
 
-    cargarDashboard()
+    void cargarDashboard()
   }
   nuevoRol.value = null
 }
@@ -1087,7 +1087,7 @@ const removerRol = (rol) => {
       rolChip.activo = false
     }
 
-    cargarDashboard()
+    void cargarDashboard()
   }
 }
 
@@ -1102,7 +1102,7 @@ const toggleSla = (codigoSla) => {
 
   // Actualizar el gráfico de cumplimiento mensual si hay cambios
   if (graficoMensualInstance) {
-    cargarDashboard()
+    void cargarDashboard()
   }
 }
 
@@ -1117,7 +1117,7 @@ const toggleTodosSlas = () => {
 
   // Actualizar gráfico
   if (graficoMensualInstance) {
-    cargarDashboard()
+    void cargarDashboard()
   }
 }
 
@@ -1559,7 +1559,7 @@ const iniciarAutoRefresh = () => {
   if (autoRefresh.value) {
     // Actualizar cada 30 segundos
     refreshInterval.value = setInterval(() => {
-      cargarDashboard()
+      void cargarDashboard()
     }, 30000)
   }
 }
@@ -1574,7 +1574,7 @@ const detenerAutoRefresh = () => {
 // Inicialización
 onMounted(() => {
   // Pre-cargar datos en caché en paralelo (sin bloquear)
-  Promise.all([
+  void Promise.all([
     slaStore.fetchSolicitudes(false),
     slaStore.fetchRoles(false),
     slaStore.fetchConfigSla(false),
@@ -1586,10 +1586,10 @@ onMounted(() => {
   // Cargar configuraciones iniciales (no bloqueante)
   cargarAniosDisponibles()
   cargarRolesDisponibles()
-  cargarTiposSlaParaFiltro() // Cargar tipos de SLA para el filtro
+  void cargarTiposSlaParaFiltro() // Cargar tipos de SLA para el filtro
 
   // Cargar dashboard (usará datos en caché si ya están disponibles)
-  cargarDashboard()
+  void cargarDashboard()
 
   // Iniciar actualización automática
   iniciarAutoRefresh()
@@ -2168,7 +2168,7 @@ onBeforeUnmount(() => {
 }
 
 /* Alto contraste y accesibilidad */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
   .stat-card {
     border-width: 2px;
   }
